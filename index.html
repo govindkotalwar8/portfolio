@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Govind Kotalwar | Cloud & DevOps Engineer</title>
+  <meta name="description" content="Govind Kotalwar – Cloud & DevOps Engineer Portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent-color: #00F5C4;
+      --bg-color: #0A0A0A;
+      --text-color: #EAEAEA;
+      --glass: rgba(22, 22, 22, 0.77);
+      --border: rgba(255,255,255,0.07);
+      --blur: blur(18px);
+      --font: 'Manrope', system-ui, sans-serif;
+      --transition: all .34s cubic-bezier(.75,.08,.47,1.18);
+      --radius: 1.5rem;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: linear-gradient(111deg, #181a20 44%, #0a0a0a 95%);
+      color: var(--text-color);
+      margin: 0; 
+      min-height: 100vh;
+      font-size: 17px;
+      letter-spacing: 0.01em;
+      transition: var(--transition);
+    }
+
+    /* Preloader Line */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-color, #0A0A0A);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-bar {
+      width: 240px;
+      height: 8px;
+      background: #232323;
+      border-radius: 99px;
+      overflow: hidden;
+      box-shadow: 0 1px 18px 0 rgba(0,245,196,0.13);
+    }
+    .preloader-bar .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-color, #00F5C4), #42ffd6d8 90%);
+      border-radius: 99px;
+      animation: loading-bar 1.3s linear infinite;
+    }
+    @keyframes loading-bar {
+      0% { width: 0%; }
+      70% { width: 85%; }
+      100% { width: 0%; }
+    }
+
+    /* Glassmorphism cards and grid */
+    .glass {
+      background: var(--glass);
+      border-radius: var(--radius);
+      border: 1.4px solid var(--border);
+      box-shadow: 0 4px 28px 0 rgba(0,0,0,.19);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      transition: var(--transition);
+    }
+
+    /* Navigation */
+    .main-nav {
+      position: fixed; top:0; width:100%; z-index: 20; display: flex; justify-content: space-between; align-items: center;
+      padding: 2rem 6vw; background: transparent; transition: background .4s;
+    }
+    .nav-logo {
+      font-weight: 900; font-size: 2rem; text-transform:uppercase; color: var(--text-color); letter-spacing: 0.07em;
+    }
+    .nav-menu { display:flex; gap:3rem; }
+    .nav-menu a {
+      color: var(--text-color); text-decoration:none; font-weight:700; font-size:1.15em;
+      position: relative; transition: color .32s;
+    }
+    .nav-menu a:after {
+      content: ""; display: block; width: 0%; height: 2.5px; background: var(--accent-color);
+      transition: width .32s; margin-top: 6px;
+    }
+    .nav-menu a:hover { color: var(--accent-color);}
+    .nav-menu a:hover:after { width: 100%;}
+    .theme-toggle {
+      background: none; border:none; color: var(--accent-color); font-size:1.3em; cursor:pointer;
+      margin-left: 1.2rem; transition: color .28s;
+    }
+    .light-mode {
+      --bg-color: #F8FAFF;
+      --text-color: #111114;
+      --glass: rgba(233,242,251,0.91);
+      --border: rgba(33, 44, 80, 0.18);
+      --accent-color: #0439d9;
+    }
+    /* HERO */
+    .hero-section {
+      min-height: 90vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 8vw;
+      background: linear-gradient(125deg, #181b20 40%, transparent 82%);
+      position: relative;
+    }
+    .hero-content {
+      text-align: left; max-width: 670px;
+    }
+    .hero-content h1 {
+      font-size: clamp(3.1rem, 7vw, 5.4rem);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 1.1rem;
+    }
+    .hero-content .accent { color:var(--accent-color); font-weight: 900;}
+    .hero-desc { font-size: 1.18rem; color: #b8c2ba; font-weight: 500; margin-bottom: 2.15rem; }
+    .btn-main {
+      display:inline-block; background: var(--accent-color); color: var(--bg-color);
+      border:0; border-radius: 77px; font-size:1.18em; font-weight: 800;
+      padding: 0.9em 2.3em; letter-spacing: 0.02em;
+      box-shadow: 0 1.2px 16px 0 rgba(0,245,196,0.13);
+      text-decoration: none; transition: var(--transition);
+    }
+    .btn-main:hover { transform: translateY(-2px) scale(1.04); box-shadow:0 3px 18px 0 rgba(0,245,196,0.21);}
+    .hero-socials a { color: #c0c7c2; margin-right: 2rem; font-size:1.4em; }
+    .hero-socials a:hover { color: var(--accent-color); }
+
+    /* Bento grid */
+    .bento-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px,1fr));
+      gap: 2.5vw;
+      margin: 5vw 0;
+    }
+    .bento-item {
+      padding:2.1rem 2rem; border-radius:var(--radius); background:var(--glass);
+      border:1.2px solid var(--border); transition: var(--transition); position:relative;
+    }
+    .bento-item:hover { background:rgba(41,255,232,0.07); border-color:var(--accent-color); }
+    .bento-about h2 { font-size:2.1em; font-weight:900;}
+    .btn-resume { margin-top: 1.2em;}
+
+    /* Projects Section*/
+    .projects-wrapper { display: grid; gap:3vw; grid-template-columns:repeat(auto-fit, minmax(340px,1fr)); }
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 340px;
+      padding:1.7rem;
+      border-radius:var(--radius);
+      box-shadow: 0 2px 16px 0 rgba(0,245,196,0.11);
+      border:1.1px solid var(--border); background:var(--glass);
+      transition:var(--transition);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .project-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      opacity: 0.20; 
+      z-index: 0;
+      transition: transform .5s;
+    }
+    .project-card:hover .project-bg {
+      transform: scale(1.04);
+    }
+    .project-content {
+      position: relative;
+      z-index: 2;
+      background: rgba(6,12,16,0.49);
+      backdrop-filter: blur(4px);
+      border-radius: 13px;
+    }
+    .project-tags span { background:var(--accent-color); color:var(--bg-color); border-radius:4px; font-size:.91em; margin-right:.6em; padding:.2em .82em; font-weight:700;}
+
+    footer { margin-top: 5vw; border-top: 1px solid var(--border); display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:2em 7vw 1em; font-size:.97em;color:#888;}
+    .footer-links a { color: var(--accent-color); margin:0 0.7em; }
+
+    /* Responsive tweaks */
+    @media (max-width: 750px){
+      .main-nav { padding: 1.3rem 3vw; flex-direction:column;}
+      .nav-menu { gap: 1.6rem;}
+      .hero-section { padding: 30vw 4vw 3vw;}
+      .hero-content { text-align:center; }
+      .projects-wrapper {grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<!-- Preloader animation with loading line -->
+<div id="preloader">
+  <div class="preloader-bar">
+    <div class="progress"></div>
+  </div>
+</div>
+
+<header class="main-nav glass">
+  <div>
+    <a href="#" class="nav-logo">GK</a>
+    <button class="theme-toggle" title="Toggle light/dark"><i class="fa fa-moon"></i></button>
+  </div>
+  <nav class="nav-menu">
+    <a href="#about-section">About</a>
+    <a href="#projects-section">Projects</a>
+    <a href="#contact-section">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Cloud <span class="accent">DevOps</span> Leader<br> Architecting <span class="accent">Resilience</span></h1>
+      <p class="hero-desc">I design <b>automated cloud backbones for the modern web</b>. My expertise: AWS, Infra automation, scalable deployment, and bulletproof DevOps. Let's build futures, not just servers.</p>
+      <a href="resume.pdf" class="btn-main btn-resume">Download Resume</a>
+      <div class="hero-socials" style="margin-top:2rem;">
+        <a href="https://github.com/govindkotalwar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/govind-kotalwar" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+  <section id="about-section" style="padding:5vw 8vw;">
+    <div class="bento-grid">
+      <div class="bento-item bento-about glass">
+        <h2>About Me</h2>
+        <p>
+          Hi, I'm <b>Govind</b> &mdash; Cloud/DevOps Engineer and infra optimizer. My core: <b>high-availability, automation, cost efficiency</b> and deeply secure AWS architectures. From scalable SaaS deployments to auditable pipelines, I bring agility + resilience to every stack.
+        </p>
+      </div>
+      <div class="bento-item glass"><b>AWS Cloud</b>&nbsp; <i class="fab fa-aws"></i></div>
+      <div class="bento-item glass"><b>Infra as Code</b>&nbsp; <i class="fa fa-code"></i></div>
+      <div class="bento-item glass"><b>CI/CD Pipelines</b> &nbsp; <i class="fas fa-rocket"></i></div>
+      <div class="bento-item glass"><b>Containers (Docker)</b> &nbsp;<i class="fab fa-docker"></i></div>
+      <div class="bento-item glass"><b>Serverless & DBs</b>&nbsp; <i class="fa fa-server"></i></div>
+      <div class="bento-item glass"><b>Linux Administration</b>&nbsp; <i class="fab fa-linux"></i></div>
+    </div>
+  </section>
+  <section id="projects-section" style="padding:5vw 8vw 2vw;">
+    <h2 style="font-weight:900; text-align:center; margin-bottom:3vw;">Projects</h2>
+    <div class="projects-wrapper">
+      <div class="project-card glass">
+        <div class="project-bg" style="background-image:url('https://images.unsplash.com/photo-1583483438515-32079c164472?q=80&w=2874&auto=format&fit=crop');"></div>
+        <div class="project-content">
+          <h3>HA Web App Infra</h3>
+          <p>Deployed a multi-AZ AWS infra with Auto Scaling Group & Elastic Load Balancing — 99.99% uptime, effortless scaling, <b>zero-downtime</b> releases.</p>
+          <div class="project-tags"><span>AWS</span><span>AutoScaling</span><span>CloudFormation</span></div>
+        </div>
+      </div>
+      <div class="project-card glass">
+        <div class="project-bg" style="background-image:url('https://images.unsplash.com/photo-1544419586-3a5e1136b81a?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="project-content">
+          <h3>Production-RDS MySQL</h3>
+          <p>Engineered Multi-AZ RDS instance with automated failover, daily backups, and <b>real-time health</b> monitoring for no-touch recovery.</p>
+          <div class="project-tags"><span>RDS</span><span>MySQL</span><span>CloudWatch</span></div>
+        </div>
+      </div>
+      <div class="project-card glass">
+        <div class="project-bg" style="background-image:url('https://images.unsplash.com/photo-1629904853716-f0bc64219b1b?q=80&w=2940&auto=format&fit=crop');"></div>
+        <div class="project-content">
+          <h3>Secure Web Server (EC2)</h3>
+          <p>Automated provisioning and hardening for LAMP/LEMP on EC2 &mdash; strictly logged, 24/7 monitoring, <b>OWASP secure</b> config.</p>
+          <div class="project-tags"><span>EC2</span><span>LEMP</span><span>Security</span></div>
+        </div>
+      </div>
+      <div class="project-card glass">
+        <div class="project-bg" style="background-image:url('https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2900&auto=format&fit=crop');"></div>
+        <div class="project-content">
+          <h3>Serverless Multi-region Backend</h3>
+          <p>Designed API backend with AWS Lambda, DynamoDB, DAX — latency under 25ms across geographies.</p>
+          <div class="project-tags"><span>Lambda</span><span>DAX</span><span>Serverless</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact-section" style="padding:6vw 8vw;">
+    <div class="glass" style="padding:3em 2em; max-width:500px; margin:auto; text-align:center;">
+      <h2>Let's Build Together</h2>
+      <a href="mailto:govindkotalwargk121@gmail.com" class="btn-main" style="margin:2em 0 1em 0;">Contact Me</a>
+      <p>Got a project or need advice on your cloud setup? DM me via email or LinkedIn.</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <span>&copy; <span id="copyright-year"></span> Govind Kotalwar</span>
+  <span class="footer-links">
+    <a href="https://github.com/govindkotalwar" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/govind-kotalwar" target="_blank"><i class="fab fa-linkedin"></i></a>
+  </span>
+</footer>
+<script>
+  // Preloader fade out
+  window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if(preloader) {
+      preloader.classList.add('hidden');
+      setTimeout(() => preloader.remove(), 650);
+    }
+  });
+
+  // Copyright year
+  document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+  // Light/Dark theme toggle
+  document.querySelector('.theme-toggle').onclick = function() {
+    document.body.classList.toggle('light-mode');
+    this.querySelector('i').classList.toggle('fa-moon');
+    this.querySelector('i').classList.toggle('fa-sun');
+  };
+</script>
+</body>
+</html>
