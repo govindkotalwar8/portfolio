@@ -1,30 +1,49 @@
 pipeline {
     agent any
- 
+
     environment {
-        SSH_CRED   = 'node-app'               // Jenkins credential ID
-        SERVER_IP  = '3.87.169.149'           // Your Deploy EC2 IP
+        SSH_CRED    = 'node-app'              // Jenkins credential ID
+        SERVER_IP   = '3.87.169.149'          // EC2 IP
         REMOTE_USER = 'ubuntu'
-        WEB_DIR    = '/var/www/html'
+        WEB_DIR     = '/var/www/html'
     }
- 
+
     stages {
         stage('Clone Repo') {
             steps {
                 git url: 'https://github.com/govi888/portfolio.git', branch: 'main'
             }
         }
- 
+
         stage('Deploy to Apache Server') {
             steps {
                 sshagent(credentials: ["${SSH_CRED}"]) {
                     sh '''
+                        echo "Installing Apache if not installed..."
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "
+                            if ! command -v apache2 >/dev/null 2>&1 && ! command -v httpd >/dev/null 2>&1; then
+                                if [ -f /etc/debian_version ]; then
+                                    sudo apt-get update -y
+                                    sudo apt-get install -y apache2
+                                    sudo systemctl enable apache2
+                                    sudo systemctl start apache2
+                                else
+                                    sudo yum install -y httpd
+                                    sudo systemctl enable httpd
+                                    sudo systemctl start httpd
+                                fi
+                            fi
+                        "
+
+                        echo "Ensuring web root exists..."
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo mkdir -p ${WEB_DIR}"
+
                         echo "Cleaning old files on server..."
                         ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo rm -rf ${WEB_DIR}/*"
- 
+
                         echo "Uploading index.html to /tmp on server..."
                         scp -r index.html ${REMOTE_USER}@${SERVER_IP}:/tmp/
- 
+
                         echo "Deploying file to Apache directory..."
                         ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo cp -r /tmp/index.html ${WEB_DIR}/"
                     '''
