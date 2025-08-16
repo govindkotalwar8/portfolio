@@ -2,23 +2,6 @@ pipeline {
     agent any
  
     environment {
-        SSH_CRED = 'node-app'               // Jenkins credential ID
-        SERVER_IP = '3.87.169.149'          // Your Deploy EC2 IP
-        REMOTE_USER = 'ubuntu'
-        WEB_DIR = '/var/www/html'
-    }
- 
-    stages {
-        stage('Clone Repo') {
-            steps {
-                git url: 'https://github.com/govi888/portfolio.git', branch: 'main'
-            }
-        }
- 
-        stage('Deploy to Apache Server') {pipeline {
-    agent any
- 
-    environment {
         SSH_CRED   = 'node-app'               // Jenkins credential ID
         SERVER_IP  = '3.87.169.149'           // Your Deploy EC2 IP
         REMOTE_USER = 'ubuntu'
@@ -44,24 +27,6 @@ pipeline {
  
                         echo "Deploying file to Apache directory..."
                         ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo cp -r /tmp/index.html ${WEB_DIR}/"
-                    '''
-                }
-            }
-        }
-    }
-}
-
-            steps {
-                sshagent(credentials: ["${SSH_CRED}"]) {
-                    sh '''
-                        echo "Cleaning old files on server..."
-                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo rm -rf ${WEB_DIR}/*"
- 
-                        echo "Uploading new files to /tmp on server..."
-                        scp -r index.html css js fonts images ${REMOTE_USER}@${SERVER_IP}:/tmp/
- 
-                        echo "Deploying files to Apache directory..."
-                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo cp -r /tmp/index.html /tmp/css /tmp/js /tmp/fonts /tmp/images ${WEB_DIR}/"
                     '''
                 }
             }
