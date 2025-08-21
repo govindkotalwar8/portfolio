@@ -112,11 +112,11 @@ pipeline {
 
 ### 1. Jenkins Pipeline Success
 
-![Pipeline Success Screenshot](screenshots/pipeline-success.png)
+![Pipeline Success Screenshot](images/pipeline-ss.png)
 
 ### 2. Portfolio Website on Browser
 
-![Portfolio Screenshot](screenshots/portfolio.png)
+![Portfolio Screenshot](screenshots/output.png)
 
 ---
 
