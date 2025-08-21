@@ -145,16 +145,5 @@ http://3.80.109.99
 
 ---
 
-## ✨ Author
 
-**Govind Kotalwar**
-🔗 [GitHub](https://github.com/govi888)
 
-```
-
----
-
-👉 This way, the README has your **pipeline script included**.  
-
-Do you also want me to write a **section with Linux/command-line steps for taking and saving the screenshots** (Jenkins pipeline output + portfolio in browser) so that you can quickly add them to the `screenshots/` folder?
-```
