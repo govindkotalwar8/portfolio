@@ -111,13 +111,19 @@ pipeline {
 ## 📸 Screenshots
 
 ### 1. Jenkins Pipeline Success
-
-![Pipeline Success Screenshot](images/pipeline-ss.png)
+![Pipeline Success Screenshot](Images/pipeline-ss.png)
 
 ### 2. Portfolio Website on Browser
+![Portfolio Screenshot](Images/output.png)
 
-![Portfolio Screenshot](screenshots/output.png)
+### 3. Jenkins Credentials (SSH Key Setup)
+![Jenkins Key Screenshot](Images/Jenkins%20key.png)
 
+### 4. Jenkins Pipeline Running
+![Pipeline Running Screenshot](Images/pipeline.png)
+
+### 5. Apache Server Running on EC2
+![Running Server Screenshot](Images/running%20server.png)
 ---
 
 ## 🌐 Accessing the Site
